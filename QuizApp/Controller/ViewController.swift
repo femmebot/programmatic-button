@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     var button : UIButton?
     var label : UILabel?
+    var progressBar : UIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,8 @@ class ViewController: UIViewController {
         setUpLabel(labelName: "Score", yPos: 100)
         setUpButton(buttonName: "True", yPos: 170)
         setUpButton(buttonName: "False", yPos: 100)
+        setUpProgressBar()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,17 +75,22 @@ class ViewController: UIViewController {
         // target
         button?.addTarget(self, action: #selector(buttonPress(sender:)), for: UIControlEvents.touchUpInside)
         
-        // background color
+        // background color #f1f0f0
         // button?.backgroundColor = UIColor.lightGray
+        button?.backgroundColor = UIColor(
+            red: 0xf1/255,
+            green: 0xf0/255,
+            blue: 0xf0/255,
+            alpha: 1.0)
         
         // border #ff5235
         button?.layer.cornerRadius = 5
-        button?.layer.borderWidth = 1
-        button?.layer.borderColor = UIColor(
-            red: 0xff/255,
-            green: 0x52/255,
-            blue: 0x35/255,
-            alpha: 1.0).cgColor
+//        button?.layer.borderWidth = 1
+//        button?.layer.borderColor = UIColor(
+//            red: 0xff/255,
+//            green: 0x52/255,
+//            blue: 0x35/255,
+//            alpha: 1.0).cgColor
         
         // image
         // button?.setImage(UIImage.init(named: "image.png"), for: UIControlState.normal)
@@ -91,5 +99,19 @@ class ViewController: UIViewController {
         self.view.addSubview(button!)
         
     }
+    
+    func setUpProgressBar() {
+        
+        // init
+        progressBar = UIView(frame: CGRect(x: (self.view.frame.size.width/2) - (self.view.frame.size.width/2 - 20), y: 75, width: self.view.frame.size.width - 40, height: 6))
+        progressBar?.backgroundColor = UIColor(
+            red: 0xff/255,
+            green: 0x52/255,
+            blue: 0x35/255,
+            alpha: 1.0)
+        self.view.addSubview(progressBar!)
+        
+    }
+    
 }
 
