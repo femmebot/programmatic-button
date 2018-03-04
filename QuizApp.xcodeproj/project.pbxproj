@@ -12,6 +12,9 @@
 		CD461A26204B8FCC00123EE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD461A24204B8FCC00123EE2 /* Main.storyboard */; };
 		CD461A28204B8FCC00123EE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD461A27204B8FCC00123EE2 /* Assets.xcassets */; };
 		CD461A2B204B8FCC00123EE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD461A29204B8FCC00123EE2 /* LaunchScreen.storyboard */; };
+		CD8DF0C6204C78AF0005CCF3 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DF0C5204C78AF0005CCF3 /* Question.swift */; };
+		CD8DF0C9204C78DA0005CCF3 /* QuestionBank.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DF0C8204C78DA0005CCF3 /* QuestionBank.swift */; };
+		CD8DF0CB204C79250005CCF3 /* Shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD8DF0CA204C79250005CCF3 /* Shuffle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		CD461A27204B8FCC00123EE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD461A2A204B8FCC00123EE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD461A2C204B8FCC00123EE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD8DF0C5204C78AF0005CCF3 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		CD8DF0C8204C78DA0005CCF3 /* QuestionBank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionBank.swift; sourceTree = "<group>"; };
+		CD8DF0CA204C79250005CCF3 /* Shuffle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shuffle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,57 @@
 		CD461A1F204B8FCC00123EE2 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				CD461A20204B8FCC00123EE2 /* AppDelegate.swift */,
-				CD461A22204B8FCC00123EE2 /* ViewController.swift */,
-				CD461A24204B8FCC00123EE2 /* Main.storyboard */,
-				CD461A27204B8FCC00123EE2 /* Assets.xcassets */,
+				CD8DF0C0204C780C0005CCF3 /* Controller */,
+				CD8DF0C1204C78180005CCF3 /* Model */,
+				CD8DF0C2204C781E0005CCF3 /* View */,
+				CD8DF0C4204C782D0005CCF3 /* Supporting Files */,
+				CD8DF0C3204C78250005CCF3 /* Extensions */,
 				CD461A29204B8FCC00123EE2 /* LaunchScreen.storyboard */,
 				CD461A2C204B8FCC00123EE2 /* Info.plist */,
 			);
 			path = QuizApp;
+			sourceTree = "<group>";
+		};
+		CD8DF0C0204C780C0005CCF3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CD461A20204B8FCC00123EE2 /* AppDelegate.swift */,
+				CD461A22204B8FCC00123EE2 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CD8DF0C1204C78180005CCF3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CD8DF0C5204C78AF0005CCF3 /* Question.swift */,
+				CD8DF0C8204C78DA0005CCF3 /* QuestionBank.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CD8DF0C2204C781E0005CCF3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CD461A24204B8FCC00123EE2 /* Main.storyboard */,
+				CD461A27204B8FCC00123EE2 /* Assets.xcassets */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CD8DF0C3204C78250005CCF3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CD8DF0C4204C782D0005CCF3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD8DF0CA204C79250005CCF3 /* Shuffle.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +185,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD8DF0CB204C79250005CCF3 /* Shuffle.swift in Sources */,
+				CD8DF0C6204C78AF0005CCF3 /* Question.swift in Sources */,
+				CD8DF0C9204C78DA0005CCF3 /* QuestionBank.swift in Sources */,
 				CD461A23204B8FCC00123EE2 /* ViewController.swift in Sources */,
 				CD461A21204B8FCC00123EE2 /* AppDelegate.swift in Sources */,
 			);

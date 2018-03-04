@@ -11,14 +11,18 @@ import UIKit
 class ViewController: UIViewController {
     
     var button : UIButton?
-
+    var label : UILabel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        setUpButton(buttonName: "True", yPos: 270)
-        setUpButton(buttonName: "False", yPos: 200)
+//        setUpLabel(labelName: "Progress", yPos: 50)
+        
+        setUpLabel(labelName: "Progress", yPos: 50.0)
+        setUpLabel(labelName: "Score", yPos: 100.0)
+        setUpButton(buttonName: "True", yPos: 170)
+        setUpButton(buttonName: "False", yPos: 100)
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +39,20 @@ class ViewController: UIViewController {
         } else {
             print ("Hmm…")
         }
+        
+    }
+    
+    
+    func setUpLabel(labelName : String, yPos : Double) {
+        
+        // init
+        let label = UILabel.init()
+        label.frame = CGRect(x:20.0,y:(yPos),width:100.0,height: 18.0)
+        
+        label.text = labelName
+        label.font = UIFont.systemFont(ofSize: 11)
+        label.textColor = UIColor.black
+        self.view.addSubview(label)
         
     }
 
