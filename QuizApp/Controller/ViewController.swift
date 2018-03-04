@@ -16,11 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-//        setUpLabel(labelName: "Progress", yPos: 50)
-        
-        setUpLabel(labelName: "Progress", yPos: 50.0)
-        setUpLabel(labelName: "Score", yPos: 100.0)
+        setUpLabel(labelName: "Progress", yPos: 50)
+        setUpLabel(labelName: "Score", yPos: 100)
         setUpButton(buttonName: "True", yPos: 170)
         setUpButton(buttonName: "False", yPos: 100)
     }
@@ -43,12 +40,11 @@ class ViewController: UIViewController {
     }
     
     
-    func setUpLabel(labelName : String, yPos : Double) {
+    func setUpLabel(labelName : String, yPos : Int) {
         
         // init
         let label = UILabel.init()
-        label.frame = CGRect(x:20.0,y:(yPos),width:100.0,height: 18.0)
-        
+        label.frame = CGRect(x:20,y:(yPos),width:100,height: 18)
         label.text = labelName
         label.font = UIFont.systemFont(ofSize: 11)
         label.textColor = UIColor.black
@@ -61,13 +57,14 @@ class ViewController: UIViewController {
         // init
         button = UIButton(frame: CGRect(x: (self.view.frame.size.width/2) - (self.view.frame.size.width/2 - 20), y: self.view.frame.size.height - CGFloat(yPos), width: self.view.frame.size.width - 40, height: 50))
         
-        // title hex #026aea
+        // title hex #43403c
         button?.setTitle(buttonName, for: .normal)
         button?.setTitleColor(UIColor(
-            red: 0x02/255,
-            green: 0x6a/255,
-            blue: 0xea/255,
+            red: 0x43/255,
+            green: 0x40/255,
+            blue: 0x3c/255,
             alpha: 1.0), for: .normal)
+        button?.titleLabel?.font = UIFont.systemFont(ofSize: 16)
 
         // Hex to UIColor converter http://uicolor.xyz/#/hex-to-ui
         //        button?.setTitleColor(UIColor(red:0.01, green:0.42, blue:0.92, alpha:1.0), for: .normal)
@@ -78,13 +75,13 @@ class ViewController: UIViewController {
         // background color
         // button?.backgroundColor = UIColor.lightGray
         
-        // border
+        // border #ff5235
         button?.layer.cornerRadius = 5
         button?.layer.borderWidth = 1
         button?.layer.borderColor = UIColor(
-            red: 0x02/255,
-            green: 0x6a/255,
-            blue: 0xea/255,
+            red: 0xff/255,
+            green: 0x52/255,
+            blue: 0x35/255,
             alpha: 1.0).cgColor
         
         // image
