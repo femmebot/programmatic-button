@@ -9,20 +9,30 @@
 import UIKit
 
 class ViewController: UIViewController {
+
     
     var button : UIButton?
     var label : UILabel?
-    var progressBar : UIView?
+    var progressBar : UIProgressView?
+    var scoreLabel : UILabel?
+    var questionLabel : UITextView?
+    var allQuestions = QuestionBank()
+    var pickedAnswer : Bool = false
+    var score : Int = 0
+    var counter : Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        setUpLabel(labelName: "Progress", yPos: 50)
-        setUpLabel(labelName: "Score", yPos: 100)
-        setUpButton(buttonName: "True", yPos: 170)
-        setUpButton(buttonName: "False", yPos: 100)
+        setUpLabel(labelName: "Progress", yPos: 40)
+        setUpLabel(labelName: "Score", yPos: 80)
+        setUpButton(buttonName: "True", yPos: 150)
+        setUpButton(buttonName: "False", yPos: 80)
         setUpProgressBar()
-
+        setUpScoreLabel()
+        setUpQuestionLabel()
+        updateUI()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,16 +40,19 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func buttonPress(sender: UIButton){
+    @IBAction func answerPressed(sender: UIButton){
         
         if sender.titleLabel?.text == "True" {
-            print ("True")
+            pickedAnswer = true
         } else if sender.titleLabel?.text == "False" {
-            print ("False")
+            pickedAnswer = false
         } else {
             print ("Hmm…")
         }
         
+        checkAnswer()
+        nextQuestion()
+
     }
     
     
@@ -73,7 +86,8 @@ class ViewController: UIViewController {
         //        button?.setTitleColor(UIColor(red:0.01, green:0.42, blue:0.92, alpha:1.0), for: .normal)
         
         // target
-        button?.addTarget(self, action: #selector(buttonPress(sender:)), for: UIControlEvents.touchUpInside)
+        button?.addTarget(self, action: #selector(answerPressed(sender:)), for: UIControlEvents.touchUpInside)
+
         
         // background color #f1f0f0
         // button?.backgroundColor = UIColor.lightGray
@@ -103,13 +117,107 @@ class ViewController: UIViewController {
     func setUpProgressBar() {
         
         // init
-        progressBar = UIView(frame: CGRect(x: (self.view.frame.size.width/2) - (self.view.frame.size.width/2 - 20), y: 75, width: self.view.frame.size.width - 40, height: 6))
-        progressBar?.backgroundColor = UIColor(
-            red: 0xff/255,
-            green: 0x52/255,
-            blue: 0x35/255,
-            alpha: 1.0)
-        self.view.addSubview(progressBar!)
+//        progressBar = UIView(frame: CGRect(x: (self.view.frame.size.width/2) - (self.view.frame.size.width/2 - 20), y: 75, width: self.view.frame.size.width - 40, height: 6))
+//        progressBar?.backgroundColor = UIColor(
+//            red: 0xff/255,
+//            green: 0x52/255,
+//            blue: 0x35/255,
+//            alpha: 1.0)
+//        self.view.addSubview(progressBar!)
+        let progressBarFrame : CGRect = CGRect(x: self.view.frame.size.width/2 - (self.view.frame.size.width/2 - 20), y: 65, width: self.view.frame.size.width - 40, height: 2)
+        let progressBar : UIProgressView = UIProgressView.init(frame: progressBarFrame)
+//        progressBar.progress = Float(score / allQuestions.list.count)
+        progressBar.trackTintColor = UIColor.lightGray
+        progressBar.progressTintColor = UIColor.red
+        self.view.addSubview(progressBar)
+        
+    }
+    
+    func setUpScoreLabel() {
+        
+        // init
+        let scoreLabel = UILabel.init()
+        scoreLabel.frame = CGRect(x:20,y:100,width:100,height: 24)
+        scoreLabel.text = "\(score)/\(allQuestions.list.count)"
+        scoreLabel.font = UIFont.systemFont(ofSize: 24)
+        scoreLabel.textColor = UIColor.darkGray
+        self.view.addSubview(scoreLabel)
+        
+    }
+    
+    func setUpQuestionLabel() {
+        
+        // init
+        let questionLabel = UITextView.init()
+        questionLabel.frame = CGRect(x:20,y:170,width:self.view.frame.size.width - 40,height: 80)
+        questionLabel.font = UIFont.systemFont(ofSize: 16)
+//        questionLabel.numberOfLines = 0
+        questionLabel.textColor = UIColor.black
+        
+        let firstQuestion = allQuestions.list[counter]
+        questionLabel.text = firstQuestion.questionText
+        
+        self.view.addSubview(questionLabel)
+        
+    }
+    
+    
+    func checkAnswer() {
+        
+        if pickedAnswer == allQuestions.list[counter].answer {
+            //print ("right answer")
+            ProgressHUD.showSuccess("Correct")
+            score = score + 1
+        } else {
+            ProgressHUD.showError("Wrong answer!")
+        }
+        
+        counter += 1
+        
+        updateUI()
+        
+    }
+    
+    func updateUI() {
+        
+        scoreLabel?.text = String("\(score)/\(allQuestions.list.count)")
+        print("\(score)/\(allQuestions.list.count)")
+        progressBar?.progress = Float(score / allQuestions.list.count)
+        
+    }
+    
+    func nextQuestion() {
+        
+        if counter < allQuestions.list.count {
+            questionLabel?.text = allQuestions.list[counter].questionText
+            print("next question: \(allQuestions.list[counter].questionText)")
+        } else {
+            print ("end of quiz")
+            let alert = UIAlertController(title: "Awesome!", message: "You've reached the end of the quiz. Try again?", preferredStyle: .alert )
+            
+            let restartAction = UIAlertAction(title: "Restart", style: .default, handler:{ (UIAlertAction) in self.startOver()
+            })
+            
+            alert.addAction(restartAction)
+            
+            //            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .`default`, handler: { _ in
+            //                NSLog("The \"OK\" alert occurred.")
+            //            }))
+            //            alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: .cancel, handler: { _ in
+            //                NSLog("The \"Cancel\" alert occurred.")
+            //            }))
+            self.present(alert, animated: true, completion: nil)
+            counter = 0
+        }
+    }
+    
+    func startOver() {
+        
+        counter = 0
+        score = 0
+        allQuestions.list = allQuestions.list.shuffled()
+        nextQuestion()
+        updateUI()
         
     }
     
